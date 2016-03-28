@@ -13,9 +13,9 @@ docker 1.9需要内核4.3.3及以上来支持overlay网络。
         3.把打包的代码和数据解压到配置文件所写的位置。
         4.参考shipyard的swarm搭建教程，搭建swarm。(教程中不需要proxy) http://shipyard-project.com/docs/deploy/manual/
         5.在搭建好的swarm中新建overlay网络，如：docker -H 173.26.102.10:3476 network create vxlan0 (端口号是根据第四步中的swarm-manager来确定的)
-	6.使用脚本前，使用iptables-save > iptables.save把本机的iptables导出。
-	7.将file, gateway变量赋值为正确值(file是iptables-save导出的文件路径，gateway是docker网桥的ip)
-	8.在分配容器外网ip之前，确保已经创建具有该ip的虚拟接口。
+        6.使用脚本前，使用iptables-save > iptables.save把本机的iptables导出。
+        7.将file, gateway变量赋值为正确值(file是iptables-save导出的文件路径，gateway是docker网桥的ip)
+        8.在分配容器外网ip之前，确保已经创建具有该ip的虚拟接口。
 
 ##批量部署：
 按照脚本使用说明，执行脚本。例如: ./ctnr_ctrl.sh creat config
