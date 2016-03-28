@@ -1,0 +1,16 @@
+#CONTAINER_NAME		NETWORK	PUBLIC_IP	PORT			VOLUME						IMAGE						COMMAND
+#hedgehog		vxlan0	173.26.102.229	-			/home/docker_data/hedgehog:/usr/local/var/hedgehog/data	173.26.101.234:5000/ubuntu-hedgehog	/bin/bash
+#root-spider		vxlan0 	173.26.102.202	5666/tcp		/home/docker_data/RootSpider:/opt/RootSpider,/home/docker_data/Share:/opt/Share		173.26.101.234:5000/beta-root-spider		/bin/bash
+#exchange_server	vxlan0 	173.26.102.203	53/udp			/home/docker_data/RootZoneExchange/Server:/opt/RootZoneExchangeServer,/home/docker_data/Share:/opt/Share		173.26.101.234:5000/beta-exchange-server	/bin/bash	
+#exchange-client	vxlan0 	vxlan0		-			/home/docker_data/RootZoneExchange/Client:/opt/RootZoneExchange,/home/docker_data/Share:/opt/Share		173.26.101.234:5000/beta-exchange-client	/bin/bash
+#tld-server		vxlan0 	173.26.102.205	53/udp:5666/tcp		/home/docker_data/TLDServer:/opt/TLDServer,/home/docker_data/Share:/opt/Share		173.26.101.234:5000/beta-tld-server		/bin/bash
+#tld-spider		vxlan0 	-		-			/home/docker_data/TldSpider:/opt/TldSpider,/home/docker_data/Share:/opt/Share		173.26.101.234:5000/beta-tld-spider		/bin/bash
+#tld-collector		vxlan0 	173.26.102.207	53/udp:5666/tcp		/home/docker_data/TLDCollect:/opt/TLDCollect,/home/docker_data/Share:/opt/Share		173.26.101.234:5000/beta-tld-collector		/bin/bash
+#zone-collector		vxlan0 	173.26.102.208	53/udp:5666/tcp		/home/docker_data/RootZoneCollect:/opt/RootZoneCollect,/home/docker_data/Share:/opt/Share	173.26.101.234:5000/beta-zone-collector-2	/bin/bash
+#wiki			vxlan0 	173.26.102.209	80/tcp			/home/docker_data/Share:/opt/Share					173.26.101.234:5000/beta_wiki			/bin/bash
+#nagios			vxlan0 	173.26.102.210	80/tcp:3306/tcp			/home/docker_data/nagios:/opt/data		173.26.101.234:5000/beta-nagios			/bin/bash
+#maxmind			vxlan0	-		-			-					173.26.101.234:5000/beta_maxmind		/bin/bash
+root-zone-management	vxlan0	173.26.102.211		-		/home/docker_data/root-zone-management:/opt/Data,/home/docker_data/Share:/opt/Share	173.26.101.234:5000/beta-root-zone-management	/bin/bash
+#root-server		vxlan0	173.26.102.212	53/udp:53/tcp		/home/docker_data/root-server:/opt/Data,/home/docker_data/Share:/opt/Share	173.26.101.234:5000/beta_root_server	/bin/bash
+#peer-resolution   	vxlan0  173.26.102.213  53/udp:53/tcp           /home/docker_data/PeerResolusion:/usr/local,/home/docker_data/Share:/opt/Share	173.26.101.234:5000/beta-peer-resolution            /bin/bash
+#emergency-response-interface	vxlan0  173.26.102.214  53/udp:53/tcp	/home/docker_data/EmergencyResponseInterface:/usr/local,/home/docker_data/Share:/opt/Share	173.26.101.234:5000/beta-emergency-response-interface	/bin/bash
