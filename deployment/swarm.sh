@@ -1,12 +1,11 @@
 #usage.  
-if [ $# != 3 ]; then
-	echo "usage: $0 host_ip manage_port agent_port"
+if [ $# != 2 ]; then
+	echo "usage: $0 host_ip manage_port"
 	exit
 fi
 
 host_ip=$1
 manage_port=$2
-agent_port=$3
 
 #data store.
 docker run \
@@ -30,10 +29,11 @@ docker run \
 docker run \
     -ti \
     -d \
+    -p $manage_port:2375 \
     --restart=always \
     --name shipyard-swarm-manager \
     swarm:latest \
-    manage --host tcp://0.0.0.0:$manage_port etcd://$host_ip:4001
+    manage --host tcp://0.0.0.0:2375 etcd://$host_ip:4001
 
 #swarm agent
 docker run \
@@ -42,7 +42,7 @@ docker run \
     --restart=always \
     --name shipyard-swarm-agent \
     swarm:latest \
-    join --addr $host_ip:$agent_port etcd://$host_ip:4001
+    join --addr $host_ip:2375 etcd://$host_ip:4001
 
 #shipyard controller
 docker run \
