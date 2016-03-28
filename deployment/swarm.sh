@@ -1,58 +1,31 @@
 #usage.  
-if [ $# != 2 ]; then
-	echo "usage: $0 host_ip manage_port"
+if [ $# != 1 ]; then
+	echo "usage: $0 host_ip"
 	exit
 fi
 
 host_ip=$1
-manage_port=$2
 
-#data store.
+docker run \
+    -d \
+    -p 8500:8500 \
+    -h consul \
+    --name=consul \
+    progrium/consul -server -bootstrap
+
 docker run \
     -ti \
     -d \
+    -p 3375:2375 \
     --restart=always \
-    --name shipyard-rethinkdb \
-    rethinkdb
-
-#discovery.
-docker run \
-    -ti \
-    -d \
-    -p 4001:4001 \
-    -p 7001:7001 \
-    --restart=always \
-    --name shipyard-discovery \
-    microbox/etcd -name discovery
-
-#swarm manager
-docker run \
-    -ti \
-    -d \
-    -p $manage_port:2375 \
-    --restart=always \
-    --name shipyard-swarm-manager \
+    --name=manager \
     swarm:latest \
-    manage --host tcp://0.0.0.0:2375 etcd://$host_ip:4001
+    manage --host tcp://0.0.0.0:2375 consul://$host_ip:8500
 
-#swarm agent
 docker run \
     -ti \
     -d \
     --restart=always \
-    --name shipyard-swarm-agent \
+    --name=agent \
     swarm:latest \
-    join --addr $host_ip:2375 etcd://$host_ip:4001
-
-#shipyard controller
-docker run \
-    -ti \
-    -d \
-    --restart=always \
-    --name shipyard-controller \
-    --link shipyard-rethinkdb:rethinkdb \
-    --link shipyard-swarm-manager:swarm \
-    -p 8080:8080 \
-    shipyard/shipyard:latest \
-    server \
-    -d tcp://swarm:$manage_port
+    join --addr $host_ip:4375 consul://$host_ip:8500
