@@ -1,6 +1,5 @@
 #!/bin/bash 
 
-gateway=172.17.42.1
 file=iptables.save #don't use the name "temp".
 log_file=docker.log
 
