@@ -1,0 +1,5 @@
+shipyard/shipyard:latest
+swarm:latest
+shipyard/docker-proxy:latest
+microbox/etcd
+rethinkdb

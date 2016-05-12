@@ -22,6 +22,11 @@ if [ "$res" == "" ]; then
 	exit
 fi
 
+#check the path.
+if [ ! -d $save_path ]; then
+	mkdir -p $save_path
+fi
+
 cat $image_list | while read strline; do
 	pseudo_name=` echo $strline | sed "s/\//#/" `
 	echo "docker save -o $save_path/$pseudo_name.tar $strline"
