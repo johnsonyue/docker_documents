@@ -8,9 +8,12 @@
 #tld-collector		vxlan0 	-	53/udp		/home/docker_data/TLDCollect:/opt/TLDCollect,/home/docker_data/Share:/opt/Share		173.26.101.234:5000/tld-collector		/bin/bash
 #zone-collector		vxlan0 	-	53/udp		/home/docker_data/RootZoneCollect:/opt/RootZoneCollect,/home/docker_data/Share:/opt/Share	173.26.101.234:5000/zone-collector-2	/bin/bash
 #wiki			vxlan0 	192.168.56.209	80/tcp			/home/docker_data/Share:/opt/Share					173.26.101.234:5000/wiki			/bin/bash
-nagios			vxlan0 	192.168.56.210	80/tcp:3306/tcp			/home/docker_data/nagios:/opt/data		173.26.101.234:5000/nagios			/bin/bash
+#nagios			vxlan0 	192.168.56.210	80/tcp:3306/tcp			/home/docker_data/nagios:/opt/data		173.26.101.234:5000/nagios			/bin/bash
 #maxmind			vxlan0	-		-			-					173.26.101.234:5000/maxmind		/bin/bash
 #root-zone-management	vxlan0	-		-		/home/docker_data/root-zone-management:/opt/Data,/home/docker_data/Share:/opt/Share	173.26.101.234:5000/root-zone-management	/bin/bash
 #root-server		vxlan0	192.168.56.212	53/udp:53/tcp		/home/docker_data/root-server:/opt/Data,/home/docker_data/Share:/opt/Share	173.26.101.234:5000/root_server	/bin/bash
 #peer-resolution   	vxlan0  192.168.56.213  53/udp:53/tcp           /home/docker_data/PeerResolusion:/usr/local,/home/docker_data/Share:/opt/Share	173.26.101.234:5000/peer-resolution            /bin/bash
 #emergency-response-interface	vxlan0  192.168.56.214  53/udp:53/tcp	/home/docker_data/EmergencyResponseInterface:/usr/local,/home/docker_data/Share:/opt/Share	173.26.101.234:5000/emergency-response-interface	/bin/bash
+root-server		vxlan0	192.168.56.212	53/udp:53/tcp		/home/docker_data/root-server:/opt/Data,/home/docker_data/Share:/opt/Share	173.26.101.234:5000/root_server	/bin/bash
+dsc-collector 		container:root-server	-	-		/home/docker_data/Dsc-collector/:/opt/config/	173.26.101.234:5000/dsc-collector	/bin/bash
+hedgehog		vxlan0	192.168.0.101	20229/tcp:873/tcp	/home/docker_data/Hedgehog/config:/opt/Hedgehog,/home/docker_data/Hedgehog/data:/usr/local/var/hedgehog/data	173.26.101.234:5000/hedgehog	/bin/bash
