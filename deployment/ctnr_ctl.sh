@@ -70,7 +70,7 @@ if [ "$operation" == "create" ]; then
 		fi
 		
 		#create a container.
-		docker run -itd $net_opt --name=$name $vol_opt $img $cmd > /dev/null
+		docker run -itd --cap-add ALL $net_opt --name=$name $vol_opt $img $cmd > /dev/null
 		echo "docker run -id --net=$net --name=$name $vol_opt $img $cmd"
 		
 		#get loc ip.
