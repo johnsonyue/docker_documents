@@ -12,6 +12,11 @@ fi
 operation=$1
 config=$2
 
+#check if iptables.save exists.
+if [ ! -e ./iptables.save ]; then
+	iptables-save > iptables.save
+fi
+
 #check if the operation exists.
 if [ "$operation" != "create" -a "$operation" != "start" -a "$operation" != "stop" -a "$operation" != "rm" -a "$operation" != "pause" -a "$operation" != "unpause" ]; then
 	echo "no such operation, only create/start/stop/rm allowed"
