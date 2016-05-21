@@ -12,11 +12,6 @@ fi
 operation=$1
 config=$2
 
-#check if iptables.save exists.
-if [ ! -e ./iptables.save ]; then
-	iptables-save > iptables.save
-fi
-
 #check if the operation exists.
 if [ "$operation" != "create" -a "$operation" != "start" -a "$operation" != "stop" -a "$operation" != "rm" -a "$operation" != "pause" -a "$operation" != "unpause" ]; then
 	echo "no such operation, only create/start/stop/rm allowed"
@@ -79,6 +74,11 @@ if [ "$operation" == "create" ]; then
 		docker_exec="nsenter --target $PID --mount --uts --ipc --net --pid -- /bin/bash -c"
 		loc=`$docker_exec "ifconfig eth1" | sed -n 2p | awk -F " " '{print $2}' | cut -d ':' -f2`
 		
+		#iptables.
+		if [ ! -e ./iptables.save ]; then
+			iptables-save > iptables.save
+		fi
+
 		#map ip. 
 		[ "$pub" != "-" -a "$port" != "-" ] && echo "./mapip.sh $loc $pub $port $name $file" && ./mapip.sh $loc $pub $port $name $file 
 		#[ "$pub" != "-" -a "$port" != "" ]  && echo "./mapip.sh $loc $pub $port $name $file" 
