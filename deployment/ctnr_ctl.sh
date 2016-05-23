@@ -123,8 +123,8 @@ if [ "$operation" == "start" ]; then
 		#map ip. 
 		[ "$pub" != "-" -a "$port" != "-" ] && echo "./mapip.sh $loc $pub $port $name $file" && ./mapip.sh $loc $pub $port $name $file 
 
-		#restart services.
-		docker exec $container_id $cmd
+		#restart services.(deleted bc bash will take over stdin and hung forever.
+		#docker exec $container_id $cmd
 
 		#logging.
 		echo `date`: container $name started. >> $log_file
