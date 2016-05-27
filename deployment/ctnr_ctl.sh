@@ -31,6 +31,12 @@ if [ "$res" == "" ]; then
 	exit
 fi
 
+#sync_iptables.
+if [ -e "./iptables.save" ]; then
+	echo "./sync_iptables.sh $file";
+	./sync_iptables.sh $file;
+	echo
+fi
 
 #create container(s).
 if [ "$operation" == "create" ]; then
